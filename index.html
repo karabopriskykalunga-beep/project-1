@@ -51,38 +51,40 @@ label{font-weight:600;font-size:13px;color:#334155;display:block;margin-top:6px}
 
 <div id="p1" class="page active">
 <div class="hero">
-<h1>Find Your Perfect Property in South Africa</h1>
-<p>NSFAS Student Rooms from R1 800 to Cape Town Luxury Villas up to R10.5M — Real Supabase Database Connected</p>
+<h1>PropertyConnect</h1>
+<p>Student Accomodation Matching and System Management<br>Find.Match.Connect.Home</p>
 <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px">
 <button class="btn btn-primary" onclick="showPage(2)">Get Started → Create Account</button>
 <button class="btn btn-outline" onclick="showPage(4)">Login</button>
 </div>
 <div class="notice" style="margin:28px auto 0 auto;max-width:680px;background:rgba(255,255,255,.15);color:white;border-color:rgba(255,255,255,.3);text-align:left">
-<b>✓ Richfield Assessment Ready:</b><br>
+<b>✓ How the Project Started:</b><br>
 • Supabase URL: https://umwxavfqhkuhvkfydcoa.supabase.co<br>
+•we saw students losing NSFAS to fake facebook rooms.small and nutral landlords like Mrs waynter couldnt list on property 24.
+•so we Build PropertyConnect,making sure that we can save students that move to new cities without having places to stay,this is the way to go,Feel connected and be connected.
 • Tables: users (signup details) | listings (properties) | transactions (buy/rent with PC- ref + owner bank)<br>
-• 5 Pages: Welcome → Sign Up (Mr/Mrs/Sex) → Address/Banking → Login → Dashboard
+• 5 Pages: Welcome → Sign Up  → Address/Banking → Login → Dashboard
 </div>
 </div>
 <div class="grid" style="margin-top:24px">
-<div class="card"><h3>🎓 NSFAS Students</h3><p class="small">Rooms R1 800 - R4 500 near campuses: Pretoria, Johannesburg, Durban, Cape Town.</p></div>
-<div class="card"><h3>🏖️ Cape Town Luxury</h3><p class="small">Beachfront Villas R3.5M - R10.5M in Clifton, Camps Bay, Sea Point.</p></div>
+<div class="card"><h3>🎓 NSFAS Students</h3><p class="small">Rooms R1 800 - R4 500 near campuses: Pretoria, Johannesburg, Durban,northwest,Limpopo, Cape Town.</p></div>
+<div class="card"><h3>🏖️ Grown ups Luxury</h3><p class="small">get ur luxury house start at R3.5M - R10.5M in Limpopo,Pretoria,Johanessburg,Durban,Free State,Cape Town.</p></div>
 </div>
 </div>
 
 <div id="p2" class="page">
 <div class="card" style="max-width:720px;margin:30px auto">
 <div class="step-indicator"><div class="step active"></div><div class="step"></div><div class="step"></div></div>
-<h2>Sign Up — Step 1 of 3: Personal Details (Mr/Mrs)</h2>
+<h2>Sign Up — Step 1 of 3: Personal Details</h2>
 <div class="grid">
 <div><label>Title *</label><select id="title" class="input"><option value="">Select Title</option><option>Mr</option><option>Mrs</option><option>Miss</option><option>Ms</option><option>Dr</option><option>Prof</option></select></div>
 <div><label>Sex *</label><select id="sex" class="input"><option value="">Select Sex</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div>
 </div>
 <div class="grid">
-<div><label>First Name *</label><input id="first" class="input" placeholder="Karabo"></div>
+<div><label>First Name *</label><input id="first" class="input" placeholder="Waynter"></div>
 <div><label>Last Name *</label><input id="last" class="input" placeholder="Kalunga"></div>
 </div>
-<label>Email *</label><input id="email" class="input" type="email" placeholder="karabo@example.com">
+<label>Email *</label><input id="email" class="input" type="email" placeholder="karabopriskykalunga@example.com">
 <label>Phone *</label><input id="phone" class="input" placeholder="071 234 5678">
 <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="validateStep1()">Next → Address & Banking</button>
 <p style="margin-top:12px;font-size:14px;text-align:center">Already have account? <a href="#" onclick="showPage(4);return false" style="color:#2563eb;font-weight:700">Login here</a></p>
@@ -113,7 +115,7 @@ label{font-weight:600;font-size:13px;color:#334155;display:block;margin-top:6px}
 <div id="p4" class="page">
 <div class="card" style="max-width:500px;margin:50px auto">
 <div class="step-indicator"><div class="step active"></div><div class="step active"></div><div class="step active"></div></div>
-<h2>Login — Validates from Supabase users table</h2>
+<h2>Login — your property journey continues.</h2>
 <label>Email</label><input id="loginEmail" class="input" type="email">
 <label>Password</label><input id="loginPass" class="input" type="password">
 <button class="btn btn-dark" style="width:100%;margin-top:8px" onclick="login()">Login to Dashboard →</button>
