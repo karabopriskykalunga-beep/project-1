@@ -3,43 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PropertyConnect - Final Supabase DB | Richfield</title>
+<title>PropertyConnect</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-body{background:#f5f7fb;color:#1a1a2e;line-height:1.6}
-.header{background:#0f172a;color:white;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.2)}
-.logo-area{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
-.logo-area img{width:32px;height:32px;border-radius:6px;object-fit:cover;background:white}
-.page{display:none;min-height:100vh;padding:20px;max-width:1150px;margin:auto;animation:fadeIn .3s ease}
+*{margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#f5f7fb;
+     color:#1a1a2e;
+     line-height:1.6}
+.header{background:#0f172a;
+        color:white;
+        padding:14px 24px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        position:sticky;
+        top:0;
+        z-index:100;
+        box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.logo-area{display:flex;
+        align-items:center;
+        gap:10px;
+        font-weight:800;
+        font-size:18px}
+.logo-area img{width:32px;
+        height:32px;
+        border-radius:6px;
+        object-fit:cover;background:white}
+.page{display:none;
+        min-height:100vh;
+        padding:20px;
+        max-width:1150px;
+        margin:auto;
+        animation:fadeIn .3s ease}
 .page.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.hero{background:linear-gradient(135deg,#0f172a 0%,#1e40af 50%,#06b6d4 100%);color:white;border-radius:24px;padding:70px 30px;text-align:center;margin-top:20px}
-.hero h1{font-size:44px;margin-bottom:12px;line-height:1.2}
-.hero p{font-size:18px;opacity:.9;max-width:700px;margin:0 auto 20px auto}
-.btn{padding:12px 22px;border-radius:10px;border:0;font-weight:700;cursor:pointer;transition:.2s}
-.btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
-.btn-primary{background:#2563eb;color:white}
-.btn-dark{background:#0f172a;color:white}
-.btn-outline{background:white;color:#0f172a;border:1px solid #e2e8f0}
-.card{background:white;border-radius:16px;padding:24px;box-shadow:0 4px 24px rgba(0,0,0,.06);margin-bottom:18px;border:1px solid #f1f5f9}
-.input, select, textarea{width:100%;padding:12px 14px;border:1px solid #e2e8f0;border-radius:10px;margin:6px 0 14px 0;font-size:15px;background:white}
-.input:focus, select:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-label{font-weight:600;font-size:13px;color:#334155;display:block;margin-top:6px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:700px){.grid{grid-template-columns:1fr}.hero h1{font-size:30px}}
-.prop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-.badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:800;letter-spacing:.3px}
-.badge-nsfas{background:#dcfce7;color:#166534;border:1px solid #bbf7d0}
-.badge-cpt{background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe}
-.badge-rent{background:#fef3c7;color:#92400e}
-.notice{background:#eff6ff;border:1px solid #bfdbfe;padding:12px 14px;border-radius:10px;font-size:13px;margin:12px 0;color:#1e40af}
-.notice-success{background:#f0fdf4;border-color:#bbf7d0;color:#166534}
-.notice-error{background:#fef2f2;border-color:#fecaca;color:#991b1b}
-.divider{height:1px;background:#f1f5f9;margin:16px 0}
-.small{font-size:12px;color:#64748b}
-.step-indicator{display:flex;gap:8px;margin-bottom:20px}
-.step{flex:1;height:6px;background:#e2e8f0;border-radius:10px}
+@keyframes fadeIn{from{opacity:0;
+        transform:translateY(10px)}to{opacity:1;
+        transform:translateY(0)}}
+.hero{background:linear-gradient(135deg,#0f172a 0%,#1e40af 50%,#06b6d4 100%);
+       color:white;
+       border-radius:24px;
+       padding:70px 30px;
+       text-align:center;
+       margin-top:20px}
+.hero h1{font-size:44px;
+        margin-bottom:12px;
+        line-height:1.2}
+.hero p{font-size:18px;
+        opacity:.9;
+        max-width:700px;
+        margin:0 auto 20px auto}
+.btn{padding:12px 22px;
+       border-radius:10px;
+       border:0;
+       font-weight:700;
+       cursor:pointer;
+       transition:.2s}
+.btn:hover{transform:translateY(-1px);
+        box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.btn-primary{background:#2563eb;
+        color:white}
+.btn-dark{background:#0f172a;
+        color:white}
+.btn-outline{background:white;
+        color:#0f172a;
+        border:1px solid #e2e8f0}
+.card{background:white;
+       border-radius:16px;
+       padding:24px;
+       box-shadow:0 4px 24px rgba(0,0,0,.06);
+       margin-bottom:18px;border:1px solid #f1f5f9}
+.input, select, textarea{width:100%;
+       padding:12px 14px;
+       border:1px solid #e2e8f0;
+       border-radius:10px;
+       margin:6px 0 14px 0;
+       font-size:15px;
+       background:white}
+.input:focus, select:focus{outline:none;
+      border-color:#2563eb;
+      box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+label{font-weight:600;
+      font-size:13px;
+      color:#334155;
+      display:block;
+      margin-top:6px}
+.grid{display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px}
+@media(max-width:700px){
+.grid{grid-template-columns:1fr}
+.hero h1{font-size:30px}}
+.prop-grid{display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+      gap:20px}
+.badge{display:inline-block;
+       padding:5px 12px;
+       border-radius:20px;
+       font-size:12px;
+       font-weight:800;
+       letter-spacing:.3px}
+.badge-nsfas{background:#dcfce7;
+        color:#166534;
+        border:1px solid #bbf7d0}
+.badge-cpt{background:#dbeafe;
+        color:#1e40af;
+        border:1px solid #bfdbfe}
+.badge-rent{background:#fef3c7;
+        color:#92400e}
+.notice{background:#eff6ff;
+        border:1px solid #bfdbfe;
+        padding:12px 14px;
+        border-radius:10px;
+        font-size:13px;
+        margin:12px 0;
+        color:#1e40af}
+.notice-success{background:#f0fdf4;
+        border-color:#bbf7d0;
+        color:#166534}
+.notice-error{background:#fef2f2;
+        border-color:#fecaca;
+        color:#991b1b}
+.divider{height:1px;
+        background:#f1f5f9;
+        margin:16px 0}
+.small{font-size:12px;
+       color:#64748b}
+.step-indicator{display:flex;
+       gap:8px;
+       margin-bottom:20px}
+.step{flex:1;
+      height:6px;
+      background:#e2e8f0;
+      border-radius:10px}
 .step.active{background:#2563eb}
 </style>
 </head>
