@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PropertyConnect - Final Supabase DB | Richfield</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#f5f7fb;color:#1a1a2e;line-height:1.6}
+.header{background:#0f172a;color:white;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.logo-area{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+.logo-area img{width:32px;height:32px;border-radius:6px;object-fit:cover;background:white}
+.page{display:none;min-height:100vh;padding:20px;max-width:1150px;margin:auto;animation:fadeIn .3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.hero{background:linear-gradient(135deg,#0f172a 0%,#1e40af 50%,#06b6d4 100%);color:white;border-radius:24px;padding:70px 30px;text-align:center;margin-top:20px}
+.hero h1{font-size:44px;margin-bottom:12px;line-height:1.2}
+.hero p{font-size:18px;opacity:.9;max-width:700px;margin:0 auto 20px auto}
+.btn{padding:12px 22px;border-radius:10px;border:0;font-weight:700;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.btn-primary{background:#2563eb;color:white}
+.btn-dark{background:#0f172a;color:white}
+.btn-outline{background:white;color:#0f172a;border:1px solid #e2e8f0}
+.card{background:white;border-radius:16px;padding:24px;box-shadow:0 4px 24px rgba(0,0,0,.06);margin-bottom:18px;border:1px solid #f1f5f9}
+.input, select, textarea{width:100%;padding:12px 14px;border:1px solid #e2e8f0;border-radius:10px;margin:6px 0 14px 0;font-size:15px;background:white}
+.input:focus, select:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+label{font-weight:600;font-size:13px;color:#334155;display:block;margin-top:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.hero h1{font-size:30px}}
+.prop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:800;letter-spacing:.3px}
+.badge-nsfas{background:#dcfce7;color:#166534;border:1px solid #bbf7d0}
+.badge-cpt{background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe}
+.badge-rent{background:#fef3c7;color:#92400e}
+.notice{background:#eff6ff;border:1px solid #bfdbfe;padding:12px 14px;border-radius:10px;font-size:13px;margin:12px 0;color:#1e40af}
+.notice-success{background:#f0fdf4;border-color:#bbf7d0;color:#166534}
+.notice-error{background:#fef2f2;border-color:#fecaca;color:#991b1b}
+.divider{height:1px;background:#f1f5f9;margin:16px 0}
+.small{font-size:12px;color:#64748b}
+.step-indicator{display:flex;gap:8px;margin-bottom:20px}
+.step{flex:1;height:6px;background:#e2e8f0;border-radius:10px}
+.step.active{background:#2563eb}
+</style>
+</head>
+<body>
+<div class="header">
+<div class="logo-area"><img src="logo.jpg" onerror="this.style.display='none'" alt="logo"> PropertyConnect</div>
+<div id="authInfo" style="font-size:13px;opacity:.9"></div>
+</div>
+
+<div id="p1" class="page active">
+<div class="hero">
+<h1>Find Your Perfect Property in South Africa</h1>
+<p>NSFAS Student Rooms from R1 800 to Cape Town Luxury Villas up to R10.5M — Real Supabase Database Connected</p>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px">
+<button class="btn btn-primary" onclick="showPage(2)">Get Started → Create Account</button>
+<button class="btn btn-outline" onclick="showPage(4)">Login</button>
+</div>
+<div class="notice" style="margin:28px auto 0 auto;max-width:680px;background:rgba(255,255,255,.15);color:white;border-color:rgba(255,255,255,.3);text-align:left">
+<b>✓ Richfield Assessment Ready:</b><br>
+• Supabase URL: https://umwxavfqhkuhvkfydcoa.supabase.co<br>
+• Tables: users (signup details) | listings (properties) | transactions (buy/rent with PC- ref + owner bank)<br>
+• 5 Pages: Welcome → Sign Up (Mr/Mrs/Sex) → Address/Banking → Login → Dashboard
+</div>
+</div>
+<div class="grid" style="margin-top:24px">
+<div class="card"><h3>🎓 NSFAS Students</h3><p class="small">Rooms R1 800 - R4 500 near campuses: Pretoria, Johannesburg, Durban, Cape Town.</p></div>
+<div class="card"><h3>🏖️ Cape Town Luxury</h3><p class="small">Beachfront Villas R3.5M - R10.5M in Clifton, Camps Bay, Sea Point.</p></div>
+</div>
+</div>
+
+<div id="p2" class="page">
+<div class="card" style="max-width:720px;margin:30px auto">
+<div class="step-indicator"><div class="step active"></div><div class="step"></div><div class="step"></div></div>
+<h2>Sign Up — Step 1 of 3: Personal Details (Mr/Mrs)</h2>
+<div class="grid">
+<div><label>Title *</label><select id="title" class="input"><option value="">Select Title</option><option>Mr</option><option>Mrs</option><option>Miss</option><option>Ms</option><option>Dr</option><option>Prof</option></select></div>
+<div><label>Sex *</label><select id="sex" class="input"><option value="">Select Sex</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div>
+</div>
+<div class="grid">
+<div><label>First Name *</label><input id="first" class="input" placeholder="Karabo"></div>
+<div><label>Last Name *</label><input id="last" class="input" placeholder="Kalunga"></div>
+</div>
+<label>Email *</label><input id="email" class="input" type="email" placeholder="karabo@example.com">
+<label>Phone *</label><input id="phone" class="input" placeholder="071 234 5678">
+<button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="validateStep1()">Next → Address & Banking</button>
+<p style="margin-top:12px;font-size:14px;text-align:center">Already have account? <a href="#" onclick="showPage(4);return false" style="color:#2563eb;font-weight:700">Login here</a></p>
+</div>
+</div>
+
+<div id="p3" class="page">
+<div class="card" style="max-width:720px;margin:30px auto">
+<div class="step-indicator"><div class="step active"></div><div class="step active"></div><div class="step"></div></div>
+<h2>Sign Up — Step 2 of 3: Address & Banking</h2>
+<label>Home Address *</label><input id="address" class="input" placeholder="123 Main Road, Pretoria, Gauteng">
+<div class="grid">
+<div><label>Bank Name *</label><select id="bankName" class="input"><option>FNB</option><option>Capitec</option><option>ABSA</option><option>Standard Bank</option><option>Nedbank</option><option>TymeBank</option></select></div>
+<div><label>Bank Account Number *</label><input id="bankAcc" class="input" placeholder="1234567890"></div>
+</div>
+<div class="grid">
+<div><label>Role *</label><select id="role" class="input"><option value="client">Client — Looking to Buy / Rent</option><option value="owner">Owner — Listing Property</option></select></div>
+<div><label>Password * (min 6 chars)</label><input id="password" class="input" type="password" placeholder="••••••"></div>
+</div>
+<label style="display:flex;gap:8px;align-items:center;margin:14px 0"><input type="checkbox" id="terms"> <span class="small">I agree to Terms & Conditions</span></label>
+<button class="btn btn-primary" style="width:100%" onclick="signup()">Create Account & Save to Supabase</button>
+<div id="signupMsg" class="notice" style="display:none"></div>
+<div class="divider"></div>
+<button class="btn btn-outline" style="width:100%" onclick="showPage(2)">← Back</button>
+</div>
+</div>
+
+<div id="p4" class="page">
+<div class="card" style="max-width:500px;margin:50px auto">
+<div class="step-indicator"><div class="step active"></div><div class="step active"></div><div class="step active"></div></div>
+<h2>Login — Validates from Supabase users table</h2>
+<label>Email</label><input id="loginEmail" class="input" type="email">
+<label>Password</label><input id="loginPass" class="input" type="password">
+<button class="btn btn-dark" style="width:100%;margin-top:8px" onclick="login()">Login to Dashboard →</button>
+<div id="loginMsg" class="notice" style="display:none"></div>
+<p style="margin-top:16px;font-size:14px;text-align:center"><a href="#" onclick="showPage(2);return false" style="color:#2563eb">No account? Sign Up</a></p>
+</div>
+</div>
+
+<div id="p5" class="page">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin:8px 0 20px 0">
+<div><h2 id="welcomeUser">Dashboard</h2><p class="small" id="userMeta"></p></div>
+<div style="display:flex;gap:8px"><button class="btn btn-primary" id="addListingBtn" style="display:none" onclick="toggleAddBox()">+ Add Property (Owner)</button><button class="btn btn-dark" onclick="logout()">Logout</button></div>
+</div>
+<div id="addBox" class="card" style="display:none;border:2px solid #2563eb">
+<h3>➕ Add New Listing — Saves to Supabase listings table</h3>
+<div class="grid">
+<div>
+<label>Property Title *</label><input id="newTitle" class="input" placeholder="NSFAS Room - Pretoria Central">
+<label>Price (R) *</label><input id="newPrice" class="input" type="number" placeholder="3200 for NSFAS, 4500000 for Luxury">
+<label>Location *</label><input id="newLocation" class="input" placeholder="Pretoria / Clifton, Cape Town">
+</div>
+<div>
+<label>Owner Name *</label><input id="newOwnerName" class="input" placeholder="Auto-filled">
+<label>Owner Bank *</label><input id="newOwnerBank" class="input" placeholder="FNB 1234567890">
+<label>Type</label><input id="newType" class="input" placeholder="NSFAS Room / Luxury Villa">
+</div>
+</div>
+<label>Description</label><textarea id="newDesc" class="input" rows="3" placeholder="2 bedroom, NSFAS accredited, WiFi..."></textarea>
+<div style="display:flex;gap:8px"><button class="btn btn-primary" style="flex:1" onclick="addListing()">Save Listing</button><button class="btn btn-outline" onclick="toggleAddBox()">Cancel</button></div>
+</div>
+<div id="stats" class="grid" style="margin-bottom:16px"></div>
+<div id="listings" class="prop-grid">Loading...</div>
+<div id="transMsg" class="notice" style="display:none"></div>
+</div>
+
+<script>
+const SUPABASE_URL = "https://umwxavfqhkuhvkfydcoa.supabase.co";
+const SUPABASE_KEY = "sb_publishable_I5Yd_sekUhNRJfSPQI3Yeg_ohSuRGIT";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let currentUser = null;
+function showPage(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p'+n).classList.add('active');window.scrollTo(0,0);}
+function validateStep1(){if(!document.getElementById('title').value){alert('Select Title Mr/Mrs');return;}if(!document.getElementById('sex').value){alert('Select Sex');return;}if(!document.getElementById('first').value.trim()||!document.getElementById('last').value.trim()||!document.getElementById('email').value.trim()){alert('Fill all fields');return;}showPage(3);}
+function toggleAddBox(){const b=document.getElementById('addBox');b.style.display=b.style.display==='none'?'block':'none';if(b.style.display==='block'&&currentUser){document.getElementById('newOwnerName').value=currentUser.first_name+' '+currentUser.last_name;document.getElementById('newOwnerBank').value=currentUser.bank_name+' '+currentUser.bank_account;}}
+async function signup(){if(!document.getElementById('terms').checked){alert('Accept Terms');return;}const data={title:document.getElementById('title').value,sex:document.getElementById('sex').value,first_name:document.getElementById('first').value.trim(),last_name:document.getElementById('last').value.trim(),email:document.getElementById('email').value.trim().toLowerCase(),phone:document.getElementById('phone').value.trim(),address:document.getElementById('address').value.trim(),bank_name:document.getElementById('bankName').value,bank_account:document.getElementById('bankAcc').value.trim(),role:document.getElementById('role').value,password:document.getElementById('password').value};if(!data.first_name||!data.email||!data.password||data.password.length<6){alert('Fill all * fields');return;}const msg=document.getElementById('signupMsg');msg.style.display='block';msg.className='notice';msg.textContent='Saving to Supabase...';const {error}=await supabaseClient.from('users').insert([data]);if(error){msg.className='notice notice-error';msg.textContent='Error: '+error.message;}else{msg.className='notice notice-success';msg.textContent='SUCCESS! Saved to users table. Go login.';setTimeout(()=>showPage(4),1200);}}
+async function login(){const email=document.getElementById('loginEmail').value.trim().toLowerCase();const pass=document.getElementById('loginPass').value;const msg=document.getElementById('loginMsg');msg.style.display='block';msg.textContent='Checking Supabase...';const {data,error}=await supabaseClient.from('users').select('*').eq('email',email).eq('password',pass).limit(1);if(error||!data||data.length===0){msg.className='notice notice-error';msg.textContent='Invalid login';return;}currentUser=data[0];document.getElementById('authInfo').textContent=currentUser.title+' '+currentUser.first_name+' ('+currentUser.role+')';document.getElementById('welcomeUser').textContent='Welcome, '+currentUser.title+' '+currentUser.first_name+' — '+currentUser.role.toUpperCase();document.getElementById('userMeta').textContent=currentUser.sex+' | '+currentUser.email+' | '+currentUser.bank_name+' '+currentUser.bank_account;if(currentUser.role==='owner'){document.getElementById('addListingBtn').style.display='inline-block';}showPage(5);loadListings();}
+async function loadListings(){const container=document.getElementById('listings');const stats=document.getElementById('stats');container.innerHTML='Loading from Supabase...';const {data,error}=await supabaseClient.from('listings').select('*').order('created_at',{ascending:false});if(error){container.innerHTML='Error: '+error.message;return;}if(!data||data.length===0){container.innerHTML='No listings yet. Owner add one.';return;}const nsfas=data.filter(i=>Number(i.price)<5000).length;stats.innerHTML=`<div class="card"><b>${data.length}</b> Properties | <span class="badge badge-nsfas">${nsfas} NSFAS</span> | <span class="badge badge-cpt">${data.length-nsfas} Luxury</span></div>`;container.innerHTML='';data.forEach(item=>{const price=Number(item.price);const isNsfas=price<5000;const card=document.createElement('div');card.className='card';card.innerHTML=`<span class="badge ${isNsfas?'badge-nsfas':'badge-cpt'}">${isNsfas?'NSFAS R'+price:'Luxury R'+(price/1000000).toFixed(2)+'M'}</span><h3 style="margin:10px 0">${item.title}</h3><p class="small">${item.description||''}</p><div class="small" style="background:#f8fafc;padding:8px;border-radius:8px;margin:8px 0"><b>Owner:</b> ${item.owner_name}<br><b>Bank:</b> ${item.owner_bank}</div><h3 style="color:#2563eb">R ${price.toLocaleString()}</h3><div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-primary" style="flex:1" onclick="buyProperty('${item.id}','${item.title.replace(/'/g,"\\'")}',${price},'${(item.owner_bank||'').replace(/'/g,"\\'")}')">Buy / Rent — Record Transaction</button>${currentUser&&currentUser.role==='owner'?`<button class="btn btn-dark" onclick="deleteListing('${item.id}')">Delete</button>`:''}</div>`;container.appendChild(card);});}
+async function addListing(){const title=document.getElementById('newTitle').value.trim();const price=Number(document.getElementById('newPrice').value);const location=document.getElementById('newLocation').value.trim();const owner_name=document.getElementById('newOwnerName').value.trim()||currentUser.first_name+' '+currentUser.last_name;const owner_bank=document.getElementById('newOwnerBank').value.trim()||currentUser.bank_name+' '+currentUser.bank_account;const type=document.getElementById('newType').value.trim();const description=document.getElementById('newDesc').value.trim();if(!title||!price||!location){alert('Title, Price, Location required');return;}const {error}=await supabaseClient.from('listings').insert([{title,price,location,owner_name,owner_bank,type,description}]);if(error){alert('Error: '+error.message);}else{alert('Listing saved!');document.getElementById('addBox').style.display='none';loadListings();}}
+async function buyProperty(id,title,price,ownerBank){if(!currentUser){alert('Login first');showPage(4);return;}if(!confirm(`Buy ${title} for R${price}? Transaction will be recorded with owner bank ${ownerBank}`))return;const ref='PC-'+Math.floor(Math.random()*900000+100000);const {error}=await supabaseClient.from('transactions').insert([{client_email:currentUser.email,owner_bank:ownerBank,amount:price,property_title:title,reference:ref,status:'paid_to_owner'}]);if(error){alert('Transaction error: '+error.message);return;}await supabaseClient.from('listings').delete().eq('id',id);const msg=document.getElementById('transMsg');msg.style.display='block';msg.className='notice notice-success';msg.innerHTML=`✅ SUCCESS! Ref ${ref} saved to transactions table. R${price} to ${ownerBank}`;loadListings();}
+async function deleteListing(id){if(!confirm('Delete this listing?'))return;await supabaseClient.from('listings').delete().eq('id',id);loadListings();}
+function logout(){currentUser=null;document.getElementById('authInfo').textContent='';document.getElementById('addListingBtn').style.display='none';showPage(1);}
+</script>
+</body>
+</html>
