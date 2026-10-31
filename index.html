@@ -158,6 +158,9 @@ label{font-weight:600;
 <div class="notice" style="margin:28px auto 0 auto;max-width:680px;background:rgba(255,255,255,.15);color:white;border-color:rgba(255,255,255,.3);text-align:left">
 <b>✓ How the Project Started:</b><br>
 <b>Team:Karabo Elias Kalunga(Lead Dev,JS Dev,Backend),Malesa Letsobana(UI/UX),Gavaza Mashaba(Backend),Thapelo Swana(DBA),Tlhotlhonya Maponya(JS Dev),Nkokae Maponya(QA/Docs)</b>
+<div id="liveCount" style="background:#0f172a;color:#FFC107;padding:10px;border-radius:8px;font-weight:800;text-align:center;margin-top:12px">
+Loading count...
+</div>
 <br>• Supabase URL: https://umwxavfqhkuhvkfydcoa.supabase.co<br>
 •we saw students losing NSFAS to fake facebook rooms.small and nutral landlords like Mrs waynter couldnt list on property 24.
 <br>•so we Build PropertyConnect,making sure that we can save students that move to new cities without having places to stay,this is the way to go,Feel connected and be connected.
@@ -256,14 +259,65 @@ const SUPABASE_KEY = "sb_publishable_I5Yd_sekUhNRJfSPQI3Yeg_ohSuRGIT";
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 let currentUser = null;
 function showPage(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p'+n).classList.add('active');window.scrollTo(0,0);}
-function validateStep1(){if(!document.getElementById('title').value){alert('Select Title Mr/Mrs');return;}if(!document.getElementById('sex').value){alert('Select Sex');return;}if(!document.getElementById('first').value.trim()||!document.getElementById('last').value.trim()||!document.getElementById('email').value.trim()){alert('Fill all fields');return;}showPage(3);}
-function toggleAddBox(){const b=document.getElementById('addBox');b.style.display=b.style.display==='none'?'block':'none';if(b.style.display==='block'&&currentUser){document.getElementById('newOwnerName').value=currentUser.first_name+' '+currentUser.last_name;document.getElementById('newOwnerBank').value=currentUser.bank_name+' '+currentUser.bank_account;}}
-async function signup(){if(!document.getElementById('terms').checked){alert('Accept Terms');return;}const data={title:document.getElementById('title').value,sex:document.getElementById('sex').value,first_name:document.getElementById('first').value.trim(),last_name:document.getElementById('last').value.trim(),email:document.getElementById('email').value.trim().toLowerCase(),phone:document.getElementById('phone').value.trim(),address:document.getElementById('address').value.trim(),bank_name:document.getElementById('bankName').value,bank_account:document.getElementById('bankAcc').value.trim(),role:document.getElementById('role').value,password:document.getElementById('password').value};if(!data.first_name||!data.email||!data.password||data.password.length<6){alert('Fill all * fields');return;}const msg=document.getElementById('signupMsg');msg.style.display='block';msg.className='notice';msg.textContent='Saving to Supabase...';const {error}=await supabaseClient.from('users').insert([data]);if(error){msg.className='notice notice-error';msg.textContent='Error: '+error.message;}else{msg.className='notice notice-success';msg.textContent='SUCCESS! Saved to users table. Go login.';setTimeout(()=>showPage(4),1200);}}
-async function login(){const email=document.getElementById('loginEmail').value.trim().toLowerCase();const pass=document.getElementById('loginPass').value;const msg=document.getElementById('loginMsg');msg.style.display='block';msg.textContent='Checking Supabase...';const {data,error}=await supabaseClient.from('users').select('*').eq('email',email).eq('password',pass).limit(1);if(error||!data||data.length===0){msg.className='notice notice-error';msg.textContent='Invalid login';return;}currentUser=data[0];document.getElementById('authInfo').textContent=currentUser.title+' '+currentUser.first_name+' ('+currentUser.role+')';document.getElementById('welcomeUser').textContent='Welcome, '+currentUser.title+' '+currentUser.first_name+' — '+currentUser.role.toUpperCase();document.getElementById('userMeta').textContent=currentUser.sex+' | '+currentUser.email+' | '+currentUser.bank_name+' '+currentUser.bank_account;if(currentUser.role==='owner'){document.getElementById('addListingBtn').style.display='inline-block';}showPage(5);loadListings();}
-async function loadListings(){const container=document.getElementById('listings');const stats=document.getElementById('stats');container.innerHTML='Loading from Supabase...';const {data,error}=await supabaseClient.from('listings').select('*').order('created_at',{ascending:false});if(error){container.innerHTML='Error: '+error.message;return;}if(!data||data.length===0){container.innerHTML='No listings yet. Owner add one.';return;}const nsfas=data.filter(i=>Number(i.price)<5000).length;stats.innerHTML=`<div class="card"><b>${data.length}</b> Properties | <span class="badge badge-nsfas">${nsfas} NSFAS</span> | <span class="badge badge-cpt">${data.length-nsfas} Luxury</span></div>`;container.innerHTML='';data.forEach(item=>{const price=Number(item.price);const isNsfas=price<5000;const card=document.createElement('div');card.className='card';card.innerHTML=`<span class="badge ${isNsfas?'badge-nsfas':'badge-cpt'}">${isNsfas?'NSFAS R'+price:'Luxury R'+(price/1000000).toFixed(2)+'M'}</span><h3 style="margin:10px 0">${item.title}</h3><p class="small">${item.description||''}</p><div class="small" style="background:#f8fafc;padding:8px;border-radius:8px;margin:8px 0"><b>Owner:</b> ${item.owner_name}<br><b>Bank:</b> ${item.owner_bank}</div><h3 style="color:#2563eb">R ${price.toLocaleString()}</h3><div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-primary" style="flex:1" onclick="buyProperty('${item.id}','${item.title.replace(/'/g,"\\'")}',${price},'${(item.owner_bank||'').replace(/'/g,"\\'")}')">Buy / Rent — Record Transaction</button>${currentUser&&currentUser.role==='owner'?`<button class="btn btn-dark" onclick="deleteListing('${item.id}')">Delete</button>`:''}</div>`;container.appendChild(card);});}
-async function addListing(){const title=document.getElementById('newTitle').value.trim();const price=Number(document.getElementById('newPrice').value);const location=document.getElementById('newLocation').value.trim();const owner_name=document.getElementById('newOwnerName').value.trim()||currentUser.first_name+' '+currentUser.last_name;const owner_bank=document.getElementById('newOwnerBank').value.trim()||currentUser.bank_name+' '+currentUser.bank_account;const type=document.getElementById('newType').value.trim();const description=document.getElementById('newDesc').value.trim();if(!title||!price||!location){alert('Title, Price, Location required');return;}const {error}=await supabaseClient.from('listings').insert([{title,price,location,owner_name,owner_bank,type,description}]);if(error){alert('Error: '+error.message);}else{alert('Listing saved!');document.getElementById('addBox').style.display='none';loadListings();}}
-async function buyProperty(id,title,price,ownerBank){if(!currentUser){alert('Login first');showPage(4);return;}if(!confirm(`Buy ${title} for R${price}? Transaction will be recorded with owner bank ${ownerBank}`))return;const ref='PC-'+Math.floor(Math.random()*900000+100000);const {error}=await supabaseClient.from('transactions').insert([{client_email:currentUser.email,owner_bank:ownerBank,amount:price,property_title:title,reference:ref,status:'paid_to_owner'}]);if(error){alert('Transaction error: '+error.message);return;}await supabaseClient.from('listings').delete().eq('id',id);const msg=document.getElementById('transMsg');msg.style.display='block';msg.className='notice notice-success';msg.innerHTML=`✅ SUCCESS! Ref ${ref} saved to transactions table. R${price} to ${ownerBank}`;loadListings();}
-async function deleteListing(id){if(!confirm('Delete this listing?'))return;await supabaseClient.from('listings').delete().eq('id',id);loadListings();}
+function validateStep1(){
+if(!document.getElementById('title').value){alert('Select Title Mr/Mrs');
+return;}
+if(!document.getElementById('sex').value){alert('Select Sex');
+return;}
+if(!document.getElementById('first').value.trim()||!document.getElementById('last').value.trim()||!document.getElementById('email').value.trim()){alert('Fill all fields');
+return;}showPage(3);}
+function toggleAddBox(){
+const b=document.getElementById('addBox');b.style.display=b.style.display==='none'?'block':'none';
+if(b.style.display==='block'&&currentUser){document.getElementById('newOwnerName').value=currentUser.first_name+' '+currentUser.last_name;document.getElementById('newOwnerBank').value=currentUser.bank_name+' '+currentUser.bank_account;}}
+async function signup(){
+if(!document.getElementById('terms').checked){alert('Accept Terms');
+return;}
+const data={title:document.getElementById('title').value,sex:document.getElementById('sex').value,first_name:document.getElementById('first').value.trim(),last_name:document.getElementById('last').value.trim(),email:document.getElementById('email').value.trim().toLowerCase(),phone:document.getElementById('phone').value.trim(),address:document.getElementById('address').value.trim(),bank_name:document.getElementById('bankName').value,bank_account:document.getElementById('bankAcc').value.trim(),role:document.getElementById('role').value,password:document.getElementById('password').value};if(!data.first_name||!data.email||!data.password||data.password.length<6){alert('Fill all * fields');return;}const msg=document.getElementById('signupMsg');msg.style.display='block';msg.className='notice';msg.textContent='Saving to Supabase...';const {error}=await supabaseClient.from('users').insert([data]);if(error){msg.className='notice notice-error';msg.textContent='Error: '+error.message;}else{msg.className='notice notice-success';msg.textContent='SUCCESS! Saved to users table. Go login.';setTimeout(()=>showPage(4),1200);}}
+async function login(){
+const email=document.getElementById('loginEmail').value.trim().toLowerCase();
+const pass=document.getElementById('loginPass').value;
+const msg=document.getElementById('loginMsg');msg.style.display='block';msg.textContent='Checking Supabase...';
+const {data,error}=await supabaseClient.from('users').select('*').eq('email',email).eq('password',pass).limit(1);
+if(error||!data||data.length===0){msg.className='notice notice-error';msg.textContent='Invalid login';
+return;}currentUser=data[0];document.getElementById('authInfo').textContent=currentUser.title+' '+currentUser.first_name+' ('+currentUser.role+')';document.getElementById('welcomeUser').textContent='Welcome, '+currentUser.title+' '+currentUser.first_name+' — '+currentUser.role.toUpperCase();document.getElementById('userMeta').textContent=currentUser.sex+' | '+currentUser.email+' | '+currentUser.bank_name+' '+currentUser.bank_account;if(currentUser.role==='owner'){document.getElementById('addListingBtn').style.display='inline-block';}showPage(5);loadListings();}
+async function loadListings(){
+const container=document.getElementById('listings');
+const stats=document.getElementById('stats');container.innerHTML='Loading from Supabase...';
+const {data,error}=await supabaseClient.from('listings').select('*').order('created_at',{ascending:false});
+if(error){container.innerHTML='Error: '+error.message;
+return;}
+if(!data||data.length===0){container.innerHTML='No listings yet. Owner add one.';
+return;}
+const nsfas=data.filter(i=>Number(i.price)<5000).length;stats.innerHTML=`<div class="card"><b>${data.length}</b> Properties | <span class="badge badge-nsfas">${nsfas} NSFAS</span> | <span class="badge badge-cpt">${data.length-nsfas} Luxury</span></div>`;container.innerHTML='';data.forEach(item=>{
+const price=Number(item.price);
+const isNsfas=price<5000;
+const card=document.createElement('div');card.className='card';card.innerHTML=`<span class="badge ${isNsfas?'badge-nsfas':'badge-cpt'}">${isNsfas?'NSFAS R'+price:'Luxury R'+(price/1000000).toFixed(2)+'M'}</span><h3 style="margin:10px 0">${item.title}</h3><p class="small">${item.description||''}</p><div class="small" style="background:#f8fafc;padding:8px;border-radius:8px;margin:8px 0"><b>Owner:</b> ${item.owner_name}<br><b>Bank:</b> ${item.owner_bank}</div><h3 style="color:#2563eb">R ${price.toLocaleString()}</h3><div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-primary" style="flex:1" onclick="buyProperty('${item.id}','${item.title.replace(/'/g,"\\'")}',${price},'${(item.owner_bank||'').replace(/'/g,"\\'")}')">Buy / Rent — Record Transaction</button>${currentUser&&currentUser.role==='owner'?`<button class="btn btn-dark" onclick="deleteListing('${item.id}')">Delete</button>`:''}</div>`;container.appendChild(card);});}
+async function addListing(){
+const title=document.getElementById('newTitle').value.trim();
+const price=Number(document.getElementById('newPrice').value);
+const location=document.getElementById('newLocation').value.trim();
+const owner_name=document.getElementById('newOwnerName').value.trim()||currentUser.first_name+' '+currentUser.last_name;
+const owner_bank=document.getElementById('newOwnerBank').value.trim()||currentUser.bank_name+' '+currentUser.bank_account;
+const type=document.getElementById('newType').value.trim();
+const description=document.getElementById('newDesc').value.trim();
+if(!title||!price||!location){alert('Title, Price, Location required');
+return;}
+const {error}=await supabaseClient.from('listings').insert([{title,price,location,owner_name,owner_bank,type,description}]);
+if(error){alert('Error: '+error.message);}
+else{alert('Listing saved!');document.getElementById('addBox').style.display='none';loadListings();}}
+async function buyProperty(id,title,price,ownerBank){
+if(!currentUser){alert('Login first');showPage(4);
+return;}
+if(!confirm(`Buy ${title} for R${price}? Transaction will be recorded with owner bank ${ownerBank}`))
+return;
+const ref='PC-'+Math.floor(Math.random()*900000+100000);
+const {error}=await supabaseClient.from('transactions').insert([{client_email:currentUser.email,owner_bank:ownerBank,amount:price,property_title:title,reference:ref,status:'paid_to_owner'}]);
+if(error){alert('Transaction error: '+error.message);
+return;}await supabaseClient.from('listings').delete().eq('id',id);
+const msg=document.getElementById('transMsg');msg.style.display='block';msg.className='notice notice-success';msg.innerHTML=`✅ SUCCESS! Ref ${ref} saved to transactions table. R${price} to ${ownerBank}`;loadListings();}
+async function deleteListing(id){
+if(!confirm('Delete this listing?'))
+return;await supabaseClient.from('listings').delete().eq('id',id);loadListings();}
 function logout(){currentUser=null;document.getElementById('authInfo').textContent='';document.getElementById('addListingBtn').style.display='none';showPage(1);}
 </script>
 </body>
