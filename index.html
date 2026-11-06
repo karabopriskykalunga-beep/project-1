@@ -10,184 +10,386 @@
 body{background:#f5f7fb;color:#1a1a2e;line-height:1.6}
 .header{background:#0f172a;color:white;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.2);border-bottom:4px solid #FFC107}
 .logo-area{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
-.logo-area img{width:32px;height:32px;border-radius:6px;object-fit:cover;background:white}
 .page{display:none;min-height:100vh;padding:20px;max-width:1150px;margin:auto;animation:fadeIn .3s ease}
 .page.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .hero{background:linear-gradient(135deg,#FFC107 0%,#FFB300 50%,#FFA000 100%);color:#0f172a;border-radius:24px;padding:70px 30px;text-align:center;margin-top:20px}
-.hero h1{font-size:44px;margin-bottom:12px;line-height:1.2;color:#0f172a}
-.hero p{font-size:18px;opacity:.9;max-width:700px;margin:0 auto 20px auto;color:#1a1a2e}
-.btn{padding:12px 22px;border-radius:10px;border:0;font-weight:700;cursor:pointer;transition:.2s}
-.btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.hero h1{font-size:44px;margin-bottom:12px}
+.hero p{font-size:18px;opacity:.9;max-width:700px;margin:0 auto 20px auto}
+.btn{padding:12px 22px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
 .btn-primary{background:#FFC107;color:#0f172a}
 .btn-dark{background:#0f172a;color:white}
 .btn-outline{background:white;color:#0f172a;border:1px solid #e2e8f0}
+.btn-heart{background:#fff0f0;color:#e11d48;border:1px solid #fecdd3}
+.btn-danger{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}
 .card{background:white;border-radius:16px;padding:24px;box-shadow:0 4px 24px rgba(0,0,0,.06);margin-bottom:18px;border:1px solid #f1f5f9}
-.input, select, textarea{width:100%;padding:12px 14px;border:1px solid #e2e8f0;border-radius:10px;margin:6px 0 14px 0;font-size:15px;background:white}
-.input:focus, select:focus{outline:none;border-color:#FFC107;box-shadow:0 0 0 3px rgba(255,193,7,.2)}
+.input,select,textarea{width:100%;padding:12px 14px;border:1px solid #e2e8f0;border-radius:10px;margin:6px 0 14px 0;font-size:15px;background:white}
 label{font-weight:600;font-size:13px;color:#334155;display:block;margin-top:6px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.hero h1{font-size:30px}}
 .prop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-.badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:800;letter-spacing:.3px}
-.badge-nsfas{background:#dcfce7;color:#166534;border:1px solid #bbf7d0}
-.badge-cpt{background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe}
+.badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:800}
+.badge-nsfas{background:#dcfce7;color:#166534}
+.badge-cpt{background:#dbeafe;color:#1e40af}
 .badge-rent{background:#fef3c7;color:#92400e}
 .notice{background:#fffbeb;border:1px solid #fde68a;padding:12px 14px;border-radius:10px;font-size:13px;margin:12px 0;color:#92400e}
 .notice-success{background:#f0fdf4;border-color:#bbf7d0;color:#166534}
 .notice-error{background:#fef2f2;border-color:#fecaca;color:#991b1b}
-.divider{height:1px;background:#f1f5f9;margin:16px 0}
 .small{font-size:12px;color:#64748b}
 .step-indicator{display:flex;gap:8px;margin-bottom:20px}
 .step{flex:1;height:6px;background:#e2e8f0;border-radius:10px}
 .step.active{background:#FFC107}
+/* MENU */
+.menu-wrap{position:relative}
+.menu-btn{font-size:22px;background:white;color:#0f172a;border:0;padding:8px 14px;border-radius:10px;cursor:pointer;font-weight:800}
+.menu-dropdown{display:none;position:absolute;right:0;top:48px;width:260px;background:white;color:#1a1a2e;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.2);overflow:hidden;z-index:200;border:1px solid #e2e8f0}
+.menu-dropdown.show{display:block}
+.menu-item{padding:13px 16px;cursor:pointer;border-bottom:1px solid #f1f5f9;display:flex;gap:10px;align-items:center;font-size:14px;font-weight:600}
+.menu-item:hover{background:#fffbeb}
+.menu-item span{font-size:18px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center;padding:16px}
+.modal.show{display:flex}
+.modal-box{background:white;border-radius:18px;padding:22px;width:100%;max-width:520px;max-height:90vh;overflow:auto}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab{padding:10px 18px;border-radius:10px;border:1px solid #e2e8f0;background:white;cursor:pointer;font-weight:700;font-size:13px}
+.tab.active{background:#0f172a;color:#FFC107}
 </style>
 </head>
 <body>
 <div class="header">
-<div class="logo-area"><img src="logo.jpg" onerror="this.style.display='none'" alt="logo"> <span style="color:white">Property</span><span style="color:#FFC107">CONNECT</span></div>
-<div id="authInfo" style="font-size:13px;opacity:.9"></div>
+<div class="logo-area"><span style="color:white">Property</span><span style="color:#FFC107">CONNECT</span></div>
+<div id="authInfo" style="font-size:13px"></div>
 </div>
 
+<!-- WELCOME -->
 <div id="p1" class="page active">
-<div class="hero">
-<h1>PropertyConnect</h1>
-<p>Student Accomodation Matching and System Management<br>Find.Match.Connect.Home</p>
+<div class="hero"><h1>PropertyConnect</h1><p>Find.Match.Connect.Home<br>Student Accommodation Matching</p>
 <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px">
 <button class="btn btn-primary" onclick="showPage(2)">Get Started → Create Account</button>
 <button class="btn btn-outline" onclick="showPage(4)">Login</button>
 </div>
-<div class="notice" style="margin:28px auto 0 auto;max-width:680px;background:rgba(255,255,255,.85);color:#0f172a;border-color:#FFC107;text-align:left">
-<b>✓ How the Project Started:</b><br>
-<b>Team:Karabo Elias Kalunga(Lead Dev,JS Dev,Backend),Malesa Letsobana(UI/UX),Gavaza Mashaba(Backend),Thapelo Swana(DBA),Tlhotlhonya Maponya(JS Dev),Nkokae Maponya(QA/Docs)</b>
-<br><br>
-<div id="liveCount" style="background:#0f172a;color:#FFC107;padding:10px;border-radius:8px;font-weight:800;text-align:center">📊 Loading usage from database...</div>
-<br>
-• Supabase URL: https://umwxavfqhkuhvkfydcoa.supabase.co<br>
-•we saw students losing NSFAS to fake facebook rooms.small and nutral landlords like Mrs waynter couldnt list on property 24.
-<br>•so we Build PropertyConnect,making sure that we can save students that move to new cities without having places to stay,this is the way to go,Feel connected and be connected.
-<br>• Tables: users (signup details) | listings (properties) | transactions (buy/rent with PC- ref + owner bank)<br>
-• 5 Pages: Welcome → Sign Up → Address/Banking → Login → Dashboard
-</div>
-</div>
-<div class="grid" style="margin-top:24px">
-<div class="card"><h3>🎓 NSFAS Students</h3><p class="small">Rooms R1 800 - R4 500 near campuses: Pretoria, Johannesburg, Durban,northwest,Limpopo, Cape Town.</p></div>
-<div class="card"><h3>🏖️ Grown ups Luxury</h3><p class="small">get ur luxury house start at R3.5M - R10.5M in Limpopo,Pretoria,Johanessburg,Durban,Free State,Cape Town.</p></div>
-</div>
+<div class="notice" style="margin:28px auto 0 auto;max-width:680px;background:rgba(255,255,255,.85);text-align:left">
+<b>Team: Karabo Elias Kalunga (Lead Dev), Malesa Letsobana (UI/UX), Gavaza Mashaba (Backend), Thapelo Swana (DBA), Tlhotlhonya Maponya (JS Dev), Nkokae Maponya (QA/Docs)</b><br><br>
+<div id="liveCount" style="background:#0f172a;color:#FFC107;padding:10px;border-radius:8px;font-weight:800;text-align:center">Loading...</div><br>
+Tables: users | listings | transactions | visits | favorites | viewing_requests | enquiries | reports
+</div></div>
+<div class="grid" style="margin-top:24px"><div class="card"><h3>🎓 NSFAS Students</h3><p class="small">Rooms R1 800 - R4 500: Pretoria, Johannesburg, Durban, Limpopo, Cape Town.</p></div><div class="card"><h3>🏖️ Luxury</h3><p class="small">Luxury R3.5M - R10.5M: Limpopo, Pretoria, Johannesburg, Durban, Cape Town.</p></div></div>
 </div>
 
-<div id="p2" class="page">
-<div class="card" style="max-width:720px;margin:30px auto">
+<!-- SIGNUP 1 -->
+<div id="p2" class="page"><div class="card" style="max-width:720px;margin:30px auto">
 <div class="step-indicator"><div class="step active"></div><div class="step"></div><div class="step"></div></div>
-<h2>Sign Up — Step 1 of 3: Personal Details</h2>
-<div class="grid">
-<div><label>Title *</label><select id="title" class="input"><option value="">Select Title</option><option>Mr</option><option>Mrs</option><option>Miss</option><option>Ms</option><option>Dr</option><option>Prof</option></select></div>
-<div><label>Sex *</label><select id="sex" class="input"><option value="">Select Sex</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div>
-</div>
-<div class="grid">
-<div><label>First Name *</label><input id="first" class="input" placeholder="Waynter"></div>
-<div><label>Last Name *</label><input id="last" class="input" placeholder="Kalunga"></div>
-</div>
-<label>Email *</label><input id="email" class="input" type="email" placeholder="karabopriskykalunga@example.com">
-<label>Phone *</label><input id="phone" class="input" placeholder="071 234 5678">
-<button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="validateStep1()">Next → Address & Banking</button>
-<p style="margin-top:12px;font-size:14px;text-align:center">Already have account? <a href="#" onclick="showPage(4);return false" style="color:#b45309;font-weight:700">Login here</a></p>
-</div>
-</div>
+<h2>Sign Up — Step 1: Personal</h2>
+<div class="grid"><div><label>Title *</label><select id="title" class="input"><option value="">Select</option><option>Mr</option><option>Mrs</option><option>Miss</option><option>Ms</option><option>Dr</option><option>Prof</option></select></div><div><label>Sex *</label><select id="sex" class="input"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div></div>
+<div class="grid"><div><label>First Name *</label><input id="first" class="input"></div><div><label>Last Name *</label><input id="last" class="input"></div></div>
+<label>Email *</label><input id="email" class="input" type="email">
+<label>Phone *</label><input id="phone" class="input">
+<button class="btn btn-primary" style="width:100%" onclick="validateStep1()">Next →</button>
+<p style="text-align:center;margin-top:10px"><a href="#" onclick="showPage(4);return false">Login here</a></p></div></div>
 
-<div id="p3" class="page">
-<div class="card" style="max-width:720px;margin:30px auto">
+<!-- SIGNUP 2 -->
+<div id="p3" class="page"><div class="card" style="max-width:720px;margin:30px auto">
 <div class="step-indicator"><div class="step active"></div><div class="step active"></div><div class="step"></div></div>
-<h2>Sign Up — Step 2 of 3: Address & Banking</h2>
-<label>Home Address *</label><input id="address" class="input" placeholder="123 Main Road, Pretoria, Gauteng">
-<div class="grid">
-<div><label>Bank Name *</label><select id="bankName" class="input"><option>FNB</option><option>Capitec</option><option>ABSA</option><option>Standard Bank</option><option>Nedbank</option><option>TymeBank</option></select></div>
-<div><label>Bank Account Number *</label><input id="bankAcc" class="input" placeholder="1234567890"></div>
-</div>
-<div class="grid">
-<div><label>Role *</label><select id="role" class="input"><option value="client">Client — Looking to Buy / Rent</option><option value="owner">Owner — Listing Property</option></select></div>
-<div><label>Password * (min 6 chars)</label><input id="password" class="input" type="password" placeholder="••••••"></div>
-</div>
-<label style="display:flex;gap:8px;align-items:center;margin:14px 0"><input type="checkbox" id="terms"> <span class="small">I agree to Terms & Conditions</span></label>
-<button class="btn btn-primary" style="width:100%" onclick="signup()">Create Account & Save to Supabase</button>
-<div id="signupMsg" class="notice" style="display:none"></div>
-<div class="divider"></div>
-<button class="btn btn-outline" style="width:100%" onclick="showPage(2)">← Back</button>
-</div>
-</div>
+<h2>Sign Up — Step 2: Address & Banking</h2>
+<label>Home Address *</label><input id="address" class="input">
+<div class="grid"><div><label>Bank Name *</label><select id="bankName" class="input"><option>FNB</option><option>Capitec</option><option>ABSA</option><option>Standard Bank</option><option>Nedbank</option><option>TymeBank</option></select></div><div><label>Bank Account *</label><input id="bankAcc" class="input"></div></div>
+<div class="grid"><div><label>Role *</label><select id="role" class="input"><option value="client">Client — Buy / Rent</option><option value="owner">Owner — Listing Property</option></select></div><div><label>Password *</label><input id="password" class="input" type="password"></div></div>
+<label><input type="checkbox" id="terms"> I agree to Terms</label>
+<button class="btn btn-primary" style="width:100%" onclick="signup()">Create Account</button><div id="signupMsg" class="notice" style="display:none"></div>
+<button class="btn btn-outline" style="width:100%;margin-top:10px" onclick="showPage(2)">← Back</button></div></div>
 
-<div id="p4" class="page">
-<div class="card" style="max-width:500px;margin:50px auto">
-<div class="step-indicator"><div class="step active"></div><div class="step active"></div><div class="step active"></div></div>
-<h2>Login — your property journey continues.</h2>
-<label>Email</label><input id="loginEmail" class="input" type="email">
-<label>Password</label><input id="loginPass" class="input" type="password">
-<button class="btn btn-dark" style="width:100%;margin-top:8px" onclick="login()">Login to Dashboard →</button>
-<div id="loginMsg" class="notice" style="display:none"></div>
-<p style="margin-top:16px;font-size:14px;text-align:center"><a href="#" onclick="showPage(2);return false" style="color:#b45309">No account? Sign Up</a></p>
-</div>
-</div>
+<!-- LOGIN -->
+<div id="p4" class="page"><div class="card" style="max-width:500px;margin:50px auto">
+<h2>Login</h2><label>Email</label><input id="loginEmail" class="input" type="email"><label>Password</label><input id="loginPass" class="input" type="password">
+<button class="btn btn-dark" style="width:100%" onclick="login()">Login to Dashboard →</button><div id="loginMsg" class="notice" style="display:none"></div>
+<p style="text-align:center;margin-top:12px"><a href="#" onclick="forgotPassword();return false" style="color:#dc2626;font-weight:700">Forgot Password? Reset Here</a></p>
+<p style="text-align:center"><a href="#" onclick="showPage(2);return false">No account? Sign Up</a></p></div></div>
 
+<!-- DASHBOARD -->
 <div id="p5" class="page">
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin:8px 0 20px 0">
-<div><h2 id="welcomeUser">Dashboard</h2><p class="small" id="userMeta"></p></div>
-<div style="display:flex;gap:8px"><button class="btn btn-primary" id="addListingBtn" style="display:none" onclick="toggleAddBox()">+ Add Property (Owner)</button><button class="btn btn-dark" onclick="logout()">Logout</button></div>
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+<div><h2 id="welcomeUser">Dashboard</h2><p class="small" id="userMeta"></p><p class="small" id="prefLabel" style="color:#b45309;font-weight:700"></p></div>
+<div style="display:flex;gap:8px;align-items:center">
+<button class="btn btn-primary" id="addListingBtn" style="display:none" onclick="toggleAddBox()">+ Add Property</button>
+<!-- 3 DOTS MENU -->
+<div class="menu-wrap">
+<button class="menu-btn" onclick="toggleMenu(event)">⋮</button>
+<div id="mainMenu" class="menu-dropdown">
+<div class="menu-item" onclick="openFavourites()"><span>❤️</span> Favourites</div>
+<div class="menu-item" onclick="openPreference()"><span>⭐</span> Preference</div>
+<div class="menu-item" onclick="openFilter()"><span>🔍</span> Filter</div>
+<div class="menu-item" onclick="openSearch()"><span>📍</span> Search (location)</div>
+<div class="menu-item" onclick="openReports()"><span>🚨</span> Report (scams)</div>
+<div class="menu-item" onclick="openEnquiries()"><span>💬</span> Enquiries</div>
+<div class="menu-item" onclick="openSecurity()"><span>🔒</span> Security settings</div>
+<div class="menu-item" onclick="logout()"><span>🚪</span> Logout</div>
 </div>
+</div>
+</div>
+</div>
+
+<!-- SEARCH BAR -->
+<div style="margin:16px 0;display:flex;gap:8px">
+<input id="searchInput" class="input" placeholder="🔍 Search by location: Pretoria, Polokwane, Cape Town, street..." oninput="doSearch()" style="margin:0">
+<button class="btn btn-dark" onclick="doSearch()">Search</button>
+<button class="btn btn-outline" onclick="clearSearch()">Clear</button>
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="switchTab('all')" id="tab-all">All Properties</button>
+<button class="tab" onclick="switchTab('fav')" id="tab-fav">❤️ Favourites</button>
+<button class="tab" onclick="switchTab('view')" id="tab-view">👁️ Viewing</button>
+<button class="tab" onclick="switchTab('enq')" id="tab-enq">💬 Enquiries</button>
+<button class="tab" onclick="switchTab('report')" id="tab-report">🚨 My Reports</button>
+</div>
+
+<h3>🇿🇦 Choose Province (9 Provinces)</h3>
+<div id="provinceTabs" style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px 0"></div>
+<div class="grid">
+<div><label>City</label><select id="cityFilter" class="input" onchange="loadListings()"><option value="">All Cities</option></select></div>
+<div><label>House Type</label><select id="typeFilter" class="input" onchange="setType(this.value)"><option value="">All Types</option><option>Bachelor</option><option>1 Bedroom</option><option>2 Bedroom</option><option>3 Bedroom</option><option>NSFAS Room</option><option>Luxury Villa</option></select></div>
+</div>
+
 <div id="addBox" class="card" style="display:none;border:2px solid #FFC107">
-<h3>➕ Add New Listing — Saves to Supabase listings table</h3>
+<h3>Add New Listing</h3>
 <div class="grid">
 <div>
-<label>Property Title *</label><input id="newTitle" class="input" placeholder="NSFAS Room - Pretoria Central">
-<label>Price (R) *</label><input id="newPrice" class="input" type="number" placeholder="3200 for NSFAS, 4500000 for Luxury">
-<label>Location *</label><input id="newLocation" class="input" placeholder="Pretoria / Clifton, Cape Town">
+<label>Province *</label><select id="newProvince" class="input" onchange="updateCityDropdown('newCity',this.value)"><option>Gauteng</option><option>Western Cape</option><option>KwaZulu-Natal</option><option>Eastern Cape</option><option>Free State</option><option>Limpopo</option><option>Mpumalanga</option><option>North West</option><option>Northern Cape</option></select>
+<label>City *</label><select id="newCity" class="input"></select>
+<label>House Type *</label><select id="newPropType" class="input"><option>Bachelor</option><option>1 Bedroom</option><option>2 Bedroom</option><option>3 Bedroom</option><option>NSFAS Room</option><option>Luxury Villa</option></select>
 </div>
 <div>
-<label>Owner Name *</label><input id="newOwnerName" class="input" placeholder="Auto-filled">
-<label>Owner Bank *</label><input id="newOwnerBank" class="input" placeholder="FNB 1234567890">
-<label>Type</label><input id="newType" class="input" placeholder="NSFAS Room / Luxury Villa">
+<label>Title *</label><input id="newTitle" class="input">
+<label>Price (R) *</label><input id="newPrice" class="input" type="number">
+<label>Location / Street *</label><input id="newLocation" class="input">
 </div>
 </div>
-<label>Description</label><textarea id="newDesc" class="input" rows="3" placeholder="2 bedroom, NSFAS accredited, WiFi..."></textarea>
+<div class="grid"><div><label>Owner Name</label><input id="newOwnerName" class="input"></div><div><label>Owner Bank</label><input id="newOwnerBank" class="input"></div></div>
+<label>Image Link</label><input id="newImage" class="input" placeholder="https://...">
+<label>Description</label><textarea id="newDesc" class="input" rows="3"></textarea>
 <div style="display:flex;gap:8px"><button class="btn btn-primary" style="flex:1" onclick="addListing()">Save Listing</button><button class="btn btn-outline" onclick="toggleAddBox()">Cancel</button></div>
 </div>
+
 <div id="stats" class="grid" style="margin-bottom:16px"></div>
 <div id="listings" class="prop-grid">Loading...</div>
 <div id="transMsg" class="notice" style="display:none"></div>
 </div>
 
+<!-- MODALS -->
+<div id="prefModal" class="modal"><div class="modal-box">
+<h3>⭐ My Preference</h3><p class="small">Save once, dashboard will auto-filter for you next login.</p>
+<label>Preferred Province</label><select id="prefProvince" class="input"><option value="">Any Province</option><option>Gauteng</option><option>Western Cape</option><option>KwaZulu-Natal</option><option>Eastern Cape</option><option>Free State</option><option>Limpopo</option><option>Mpumalanga</option><option>North West</option><option>Northern Cape</option></select>
+<label>Preferred House Type</label><select id="prefType" class="input"><option value="">Any Type</option><option>Bachelor</option><option>1 Bedroom</option><option>2 Bedroom</option><option>3 Bedroom</option><option>NSFAS Room</option><option>Luxury Villa</option></select>
+<label>Max Budget (R)</label><input id="prefPrice" class="input" type="number" placeholder="e.g. 5000 for NSFAS, 5000000 for luxury">
+<button class="btn btn-primary" style="width:100%" onclick="savePreference()">Save Preference</button>
+<button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="clearPreference()">Clear Preference</button>
+<button class="btn btn-dark" style="width:100%;margin-top:8px" onclick="closeModal('prefModal')">Close</button>
+</div></div>
+
+<div id="filterModal" class="modal"><div class="modal-box">
+<h3>🔍 Filter</h3>
+<label>Province</label><select id="filterProvince" class="input"><option value="">All</option><option>Gauteng</option><option>Western Cape</option><option>KwaZulu-Natal</option><option>Eastern Cape</option><option>Free State</option><option>Limpopo</option><option>Mpumalanga</option><option>North West</option><option>Northern Cape</option></select>
+<label>House Type</label><select id="filterType" class="input"><option value="">All</option><option>Bachelor</option><option>1 Bedroom</option><option>2 Bedroom</option><option>3 Bedroom</option><option>NSFAS Room</option><option>Luxury Villa</option></select>
+<div class="grid"><div><label>Min Price</label><input id="filterMin" class="input" type="number" placeholder="0"></div><div><label>Max Price</label><input id="filterMax" class="input" type="number" placeholder="10000000"></div></div>
+<button class="btn btn-primary" style="width:100%" onclick="applyFilter()">Apply Filter</button>
+<button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="resetFilter()">Reset</button>
+<button class="btn btn-dark" style="width:100%;margin-top:8px" onclick="closeModal('filterModal')">Close</button>
+</div></div>
+
+<div id="searchModal" class="modal"><div class="modal-box">
+<h3>📍 Search by Location</h3>
+<label>Type city, street or province</label><input id="searchModalInput" class="input" placeholder="e.g. Pretoria, Polokwane, Clifton">
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<button class="btn btn-outline" onclick="quickSearch('Pretoria')">Pretoria</button>
+<button class="btn btn-outline" onclick="quickSearch('Polokwane')">Polokwane</button>
+<button class="btn btn-outline" onclick="quickSearch('Cape Town')">Cape Town</button>
+<button class="btn btn-outline" onclick="quickSearch('Durban')">Durban</button>
+</div>
+<button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="applyModalSearch()">Search</button>
+<button class="btn btn-dark" style="width:100%;margin-top:8px" onclick="closeModal('searchModal')">Close</button>
+</div></div>
+
+<div id="reportModal" class="modal"><div class="modal-box">
+<h3>🚨 Report Scam / Suspicious Listing</h3><p class="small">Report fake NSFAS rooms, fake owners asking for upfront cash, wrong photos.</p>
+<label>Which Listing? (Title)</label><input id="reportTitle" class="input" placeholder="e.g. Thabo - NSFAS Apartment">
+<label>Reason *</label><select id="reportReason" class="input"><option>Fake listing / Scam</option><option>Asks for money before viewing</option><option>Fake photos / Wrong location</option><option>Owner not responding / Ghosting</option><option>Price is fake / Bait</option><option>Other suspicious</option></select>
+<label>Details</label><textarea id="reportDetails" class="input" rows="3" placeholder="What happened?"></textarea>
+<button class="btn btn-danger" style="width:100%" onclick="submitReport()">Submit Report 🚨</button>
+<button class="btn btn-dark" style="width:100%;margin-top:8px" onclick="closeModal('reportModal')">Close</button>
+</div></div>
+
+<div id="securityModal" class="modal"><div class="modal-box">
+<h3>🔒 Security Settings</h3>
+<p class="small" id="securityInfo"></p>
+<label>Change Password</label><input id="secNewPass" class="input" type="password" placeholder="New password min 6 chars">
+<button class="btn btn-dark" style="width:100%" onclick="changePasswordSec()">Change Password</button>
+<label style="margin-top:16px">Change Bank Account</label><input id="secNewBank" class="input" placeholder="e.g. Capitec 1234567890">
+<button class="btn btn-primary" style="width:100%" onclick="changeBankSec()">Update Bank</button>
+<div class="divider" style="height:1px;background:#eee;margin:16px 0"></div>
+<button class="btn btn-danger" style="width:100%" onclick="deleteAccount()">🗑️ Delete My Account</button>
+<button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="closeModal('securityModal')">Close</button>
+</div></div>
+
 <script>
 const SUPABASE_URL = "https://umwxavfqhkuhvkfydcoa.supabase.co";
 const SUPABASE_KEY = "sb_publishable_I5Yd_sekUhNRJfSPQI3Yeg_ohSuRGIT";
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-let currentUser = null;
-
-// === TRACK HOW MANY PEOPLE USED SITE //
-async function logVisit(){
-  try{
-    await supabaseClient.from('visits').insert({ page: 'home', device: navigator.platform + ' | ' + window.innerWidth });
-  }catch(e){ console.log('visits table not yet created'); }
-}
-async function showCount(){
-  try{
-    const { count } = await supabaseClient.from('users').select('*', { count: 'exact', head: true });
-    const { count: visitCount } = await supabaseClient.from('visits').select('*', { count: 'exact', head: true });
-    const el = document.getElementById('liveCount');
-    if(el) el.innerHTML = `📊 ${count || 0} Students Registered | ${visitCount || 0} Total Visits | Live from Supabase`;
-  }catch(e){ console.log(e); }
-}
-logVisit();
-showCount();
-
+let currentUser=null, currentTab='all', selectedProvince="", selectedType="", searchText="", filterMin=0, filterMax=0, currentReportListingId=null, currentReportTitle="";
+const PROVINCES={"Gauteng":["Pretoria","Johannesburg","Centurion","Soweto","Sandton","Midrand"],"Western Cape":["Cape Town","Stellenbosch","Clifton","Paarl","George"],"KwaZulu-Natal":["Durban","Pietermaritzburg","Umhlanga","Ballito"],"Eastern Cape":["Gqeberha","East London","Mthatha"],"Free State":["Bloemfontein","Welkom"],"Limpopo":["Polokwane","Thohoyandou","Tzaneen"],"Mpumalanga":["Nelspruit","Witbank","Secunda"],"North West":["Mahikeng","Rustenburg","Potchefstroom"],"Northern Cape":["Kimberley","Upington"]};
+async function logVisit(){try{await supabaseClient.from('visits').insert({page:'home',device:navigator.platform})}catch(e){}}
+async function showCount(){try{const {count}=await supabaseClient.from('users').select('*',{count:'exact',head:true});const {count:vc}=await supabaseClient.from('visits').select('*',{count:'exact',head:true});const el=document.getElementById('liveCount');if(el)el.innerHTML=`📊 ${count||0} Registered | ${vc||0} Visits`;}catch(e){}}
+logVisit();showCount();updateCityDropdown('newCity','Gauteng');
 function showPage(n){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('p'+n).classList.add('active');window.scrollTo(0,0);}
-function validateStep1(){if(!document.getElementById('title').value){alert('Select Title Mr/Mrs');return;}if(!document.getElementById('sex').value){alert('Select Sex');return;}if(!document.getElementById('first').value.trim()||!document.getElementById('last').value.trim()||!document.getElementById('email').value.trim()){alert('Fill all fields');return;}showPage(3);}
+function validateStep1(){if(!document.getElementById('title').value||!document.getElementById('sex').value||!document.getElementById('first').value.trim()||!document.getElementById('last').value.trim()){alert('Fill all');return;}showPage(3);}
 function toggleAddBox(){const b=document.getElementById('addBox');b.style.display=b.style.display==='none'?'block':'none';if(b.style.display==='block'&&currentUser){document.getElementById('newOwnerName').value=currentUser.first_name+' '+currentUser.last_name;document.getElementById('newOwnerBank').value=currentUser.bank_name+' '+currentUser.bank_account;}}
-async function signup(){if(!document.getElementById('terms').checked){alert('Accept Terms');return;}const data={title:document.getElementById('title').value,sex:document.getElementById('sex').value,first_name:document.getElementById('first').value.trim(),last_name:document.getElementById('last').value.trim(),email:document.getElementById('email').value.trim().toLowerCase(),phone:document.getElementById('phone').value.trim(),address:document.getElementById('address').value.trim(),bank_name:document.getElementById('bankName').value,bank_account:document.getElementById('bankAcc').value.trim(),role:document.getElementById('role').value,password:document.getElementById('password').value};if(!data.first_name||!data.email||!data.password||data.password.length<6){alert('Fill all * fields');return;}const msg=document.getElementById('signupMsg');msg.style.display='block';msg.className='notice';msg.textContent='Saving to Supabase...';const {error}=await supabaseClient.from('users').insert([data]);if(error){msg.className='notice notice-error';msg.textContent='Error: '+error.message;}else{msg.className='notice notice-success';msg.textContent='SUCCESS! Saved to users table. Go login.';setTimeout(()=>showPage(4),1200);}}
-async function login(){const email=document.getElementById('loginEmail').value.trim().toLowerCase();const pass=document.getElementById('loginPass').value;const msg=document.getElementById('loginMsg');msg.style.display='block';msg.textContent='Checking Supabase...';const {data,error}=await supabaseClient.from('users').select('*').eq('email',email).eq('password',pass).limit(1);if(error||!data||data.length===0){msg.className='notice notice-error';msg.textContent='Invalid login';return;}currentUser=data[0];document.getElementById('authInfo').textContent=currentUser.title+' '+currentUser.first_name+' ('+currentUser.role+')';document.getElementById('welcomeUser').textContent='Welcome, '+currentUser.title+' '+currentUser.first_name+' — '+currentUser.role.toUpperCase();document.getElementById('userMeta').textContent=currentUser.sex+' | '+currentUser.email+' | '+currentUser.bank_name+' '+currentUser.bank_account;if(currentUser.role==='owner'){document.getElementById('addListingBtn').style.display='inline-block';}showPage(5);loadListings();}
-async function loadListings(){const container=document.getElementById('listings');const stats=document.getElementById('stats');container.innerHTML='Loading from Supabase...';const {data,error}=await supabaseClient.from('listings').select('*').order('created_at',{ascending:false});if(error){container.innerHTML='Error: '+error.message;return;}if(!data||data.length===0){container.innerHTML='No listings yet. Owner add one.';return;}const nsfas=data.filter(i=>Number(i.price)<5000).length;stats.innerHTML=`<div class="card"><b>${data.length}</b> Properties | <span class="badge badge-nsfas">${nsfas} NSFAS</span> | <span class="badge badge-cpt">${data.length-nsfas} Luxury</span></div>`;container.innerHTML='';data.forEach(item=>{const price=Number(item.price);const isNsfas=price<5000;const card=document.createElement('div');card.className='card';card.innerHTML=`<span class="badge ${isNsfas?'badge-nsfas':'badge-cpt'}">${isNsfas?'NSFAS R'+price:'Luxury R'+(price/1000000).toFixed(2)+'M'}</span><h3 style="margin:10px 0">${item.title}</h3><p class="small">${item.description||''}</p><div class="small" style="background:#f8fafc;padding:8px;border-radius:8px;margin:8px 0"><b>Owner:</b> ${item.owner_name}<br><b>Bank:</b> ${item.owner_bank}</div><h3 style="color:#b45309">R ${price.toLocaleString()}</h3><div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-primary" style="flex:1" onclick="buyProperty('${item.id}','${item.title.replace(/'/g,"\\'")}',${price},'${(item.owner_bank||'').replace(/'/g,"\\'")}')">Buy / Rent — Record Transaction</button>${currentUser&&currentUser.role==='owner'?`<button class="btn btn-dark" onclick="deleteListing('${item.id}')">Delete</button>`:''}</div>`;container.appendChild(card);});}
-async function addListing(){const title=document.getElementById('newTitle').value.trim();const price=Number(document.getElementById('newPrice').value);const location=document.getElementById('newLocation').value.trim();const owner_name=document.getElementById('newOwnerName').value.trim()||currentUser.first_name+' '+currentUser.last_name;const owner_bank=document.getElementById('newOwnerBank').value.trim()||currentUser.bank_name+' '+currentUser.bank_account;const type=document.getElementById('newType').value.trim();const description=document.getElementById('newDesc').value.trim();if(!title||!price||!location){alert('Title, Price, Location required');return;}const {error}=await supabaseClient.from('listings').insert([{title,price,location,owner_name,owner_bank,type,description}]);if(error){alert('Error: '+error.message);}else{alert('Listing saved!');document.getElementById('addBox').style.display='none';loadListings();}}
-async function buyProperty(id,title,price,ownerBank){if(!currentUser){alert('Login first');showPage(4);return;}if(!confirm(`Buy ${title} for R${price}? Transaction will be recorded with owner bank ${ownerBank}`))return;const ref='PC-'+Math.floor(Math.random()*900000+100000);const {error}=await supabaseClient.from('transactions').insert([{client_email:currentUser.email,owner_bank:ownerBank,amount:price,property_title:title,reference:ref,status:'paid_to_owner'}]);if(error){alert('Transaction error: '+error.message);return;}await supabaseClient.from('listings').delete().eq('id',id);const msg=document.getElementById('transMsg');msg.style.display='block';msg.className='notice notice-success';msg.innerHTML=`✅ SUCCESS! Ref ${ref} saved to transactions table. R${price} to ${ownerBank}`;loadListings();}
-async function deleteListing(id){if(!confirm('Delete this listing?'))return;await supabaseClient.from('listings').delete().eq('id',id);loadListings();}
-function logout(){currentUser=null;document.getElementById('authInfo').textContent='';document.getElementById('addListingBtn').style.display='none';showPage(1);}
+async function signup(){if(!document.getElementById('terms').checked){alert('Accept Terms');return;}const data={title:document.getElementById('title').value,sex:document.getElementById('sex').value,first_name:document.getElementById('first').value.trim(),last_name:document.getElementById('last').value.trim(),email:document.getElementById('email').value.trim().toLowerCase(),phone:document.getElementById('phone').value.trim(),address:document.getElementById('address').value.trim(),bank_name:document.getElementById('bankName').value,bank_account:document.getElementById('bankAcc').value.trim(),role:document.getElementById('role').value,password:document.getElementById('password').value};if(!data.password||data.password.length<6){alert('Password min 6');return;}const msg=document.getElementById('signupMsg');msg.style.display='block';msg.textContent='Saving...';const {error}=await supabaseClient.from('users').insert([data]);if(error){msg.className='notice notice-error';msg.textContent=error.message;}else{msg.className='notice notice-success';msg.textContent='SUCCESS! Go login.';setTimeout(()=>showPage(4),1200);}}
+async function login(){const email=document.getElementById('loginEmail').value.trim().toLowerCase();const pass=document.getElementById('loginPass').value;const msg=document.getElementById('loginMsg');msg.style.display='block';msg.textContent='Checking...';const {data,error}=await supabaseClient.from('users').select('*').eq('email',email).eq('password',pass).limit(1);if(error||!data||!data.length){msg.className='notice notice-error';msg.textContent='Invalid login';return;}currentUser=data[0];document.getElementById('authInfo').textContent=currentUser.title+' '+currentUser.first_name+' ('+currentUser.role+')';document.getElementById('welcomeUser').textContent='Welcome, '+currentUser.title+' '+currentUser.first_name+' - '+currentUser.role.toUpperCase();document.getElementById('userMeta').textContent=currentUser.email+' | '+currentUser.bank_name+' '+currentUser.bank_account;if(currentUser.role==='owner')document.getElementById('addListingBtn').style.display='inline-block';applyPreferenceOnLogin();showPage(5);renderProvinceTabs();setProvince(selectedProvince);loadListings();}
+async function forgotPassword(){const email=prompt("Enter your email:");if(!email)return;const bankAcc=prompt("Enter your Bank Account (must match signup):");if(!bankAcc)return;const {data}=await supabaseClient.from('users').select('*').eq('email',email.toLowerCase().trim()).eq('bank_account',bankAcc.trim()).limit(1);if(!data||!data.length){alert("Email + Bank dont match");return;}const newPass=prompt("Verified! Enter NEW password:");if(!newPass||newPass.length<6){alert("Too short");return;}const {error}=await supabaseClient.from('users').update({password:newPass}).eq('email',email.toLowerCase().trim());if(error)alert(error.message);else alert("Password changed! Login now.");}
+
+// MENU
+function toggleMenu(e){e.stopPropagation();document.getElementById('mainMenu').classList.toggle('show');}
+document.addEventListener('click',()=>{const m=document.getElementById('mainMenu');if(m)m.classList.remove('show');});
+function closeModal(id){document.getElementById(id).classList.remove('show');document.getElementById('mainMenu').classList.remove('show');}
+function openFavourites(){closeModal('prefModal');switchTab('fav');}
+function openPreference(){document.getElementById('prefProvince').value=currentUser?.pref_province||"";document.getElementById('prefType').value=currentUser?.pref_type||"";document.getElementById('prefPrice').value=currentUser?.pref_max_price||"";document.getElementById('prefModal').classList.add('show');}
+function openFilter(){document.getElementById('filterModal').classList.add('show');}
+function openSearch(){document.getElementById('searchModal').classList.add('show');}
+function openReports(){switchTab('report');}
+function openEnquiries(){switchTab('enq');}
+function openSecurity(){document.getElementById('securityInfo').innerHTML=`Logged in as <b>${currentUser.email}</b><br>Bank: ${currentUser.bank_name} ${currentUser.bank_account}<br>Role: ${currentUser.role}`;document.getElementById('securityModal').classList.add('show');}
+
+// PREFERENCE
+async function savePreference(){
+  const prov=document.getElementById('prefProvince').value;
+  const type=document.getElementById('prefType').value;
+  const price=document.getElementById('prefPrice').value;
+  const {error}=await supabaseClient.from('users').update({pref_province:prov||null,pref_type:type||null,pref_max_price:price?Number(price):null}).eq('email',currentUser.email);
+  if(error){alert(error.message);return;}
+  currentUser.pref_province=prov;currentUser.pref_type=type;currentUser.pref_max_price=price?Number(price):null;
+  alert('✅ Preference saved! Dashboard will now show only your preference.');
+  closeModal('prefModal');applyPreferenceOnLogin();loadListings();
+}
+async function clearPreference(){
+  await supabaseClient.from('users').update({pref_province:null,pref_type:null,pref_max_price:null}).eq('email',currentUser.email);
+  currentUser.pref_province=null;currentUser.pref_type=null;currentUser.pref_max_price=null;
+  selectedProvince="";selectedType="";filterMax=0;document.getElementById('prefLabel').textContent="";
+  alert('Preference cleared');closeModal('prefModal');renderProvinceTabs();loadListings();
+}
+function applyPreferenceOnLogin(){
+  if(!currentUser)return;
+  if(currentUser.pref_province){selectedProvince=currentUser.pref_province;}
+  if(currentUser.pref_type){selectedType=currentUser.pref_type;document.getElementById('typeFilter').value=selectedType;}
+  if(currentUser.pref_max_price){filterMax=Number(currentUser.pref_max_price);}
+  if(currentUser.pref_province||currentUser.pref_type||currentUser.pref_max_price){
+    document.getElementById('prefLabel').textContent=`⭐ Your Preference: ${currentUser.pref_province||'Any Province'} • ${currentUser.pref_type||'Any Type'} • Max R${currentUser.pref_max_price||'Any'}`;
+  }
+}
+
+// FILTER + SEARCH
+function applyFilter(){
+  selectedProvince=document.getElementById('filterProvince').value;
+  selectedType=document.getElementById('filterType').value;
+  filterMin=Number(document.getElementById('filterMin').value||0);
+  filterMax=Number(document.getElementById('filterMax').value||0);
+  document.getElementById('typeFilter').value=selectedType;
+  closeModal('filterModal');renderProvinceTabs();setProvince(selectedProvince);loadListings();
+}
+function resetFilter(){selectedProvince="";selectedType="";filterMin=0;filterMax=0;searchText="";document.getElementById('searchInput').value="";document.getElementById('typeFilter').value="";closeModal('filterModal');renderProvinceTabs();loadListings();}
+function doSearch(){searchText=document.getElementById('searchInput').value.trim();loadListings();}
+function clearSearch(){searchText="";document.getElementById('searchInput').value="";loadListings();}
+function quickSearch(loc){document.getElementById('searchModalInput').value=loc;}
+function applyModalSearch(){searchText=document.getElementById('searchModalInput').value.trim();document.getElementById('searchInput').value=searchText;closeModal('searchModal');loadListings();}
+
+// REPORT
+function openReportFor(id,title){currentReportListingId=id;currentReportTitle=title;document.getElementById('reportTitle').value=title;document.getElementById('reportModal').classList.add('show');}
+async function submitReport(){
+  if(!currentUser){alert('Login first');return;}
+  const reason=document.getElementById('reportReason').value;
+  const details=document.getElementById('reportDetails').value.trim();
+  const title=document.getElementById('reportTitle').value.trim();
+  const {error}=await supabaseClient.from('reports').insert([{reporter_email:currentUser.email,listing_id:currentReportListingId||null,listing_title:title,reason,details,status:'pending'}]);
+  if(error){alert('Error: '+error.message);return;}
+  alert('🚨 Report submitted! Admin will check this listing. Thank you for keeping PropertyConnect safe.');
+  closeModal('reportModal');document.getElementById('reportDetails').value="";
+}
+async function loadReports(){
+  const container=document.getElementById('listings');container.innerHTML='Loading reports...';
+  const {data}=await supabaseClient.from('reports').select('*').eq('reporter_email',currentUser.email).order('created_at',{ascending:false});
+  if(!data||!data.length){container.innerHTML='No reports yet. If you see a scam, click Report on any listing.';return;}
+  container.innerHTML='';data.forEach(r=>{const d=document.createElement('div');d.className='card';d.innerHTML=`<b>${r.listing_title}</b><br>Reason: <b>${r.reason}</b><br><span class="small">${r.details||''}</span><br>Status: <b>${r.status}</b>`;container.appendChild(d);});
+}
+
+// SECURITY
+async function changePasswordSec(){
+  const np=document.getElementById('secNewPass').value;
+  if(!np||np.length<6){alert('Min 6 chars');return;}
+  const {error}=await supabaseClient.from('users').update({password:np}).eq('email',currentUser.email);
+  if(error)alert(error.message);else{alert('✅ Password changed!');document.getElementById('secNewPass').value="";}
+}
+async function changeBankSec(){
+  const nb=document.getElementById('secNewBank').value.trim();
+  if(!nb){alert('Enter new bank');return;}
+  const {error}=await supabaseClient.from('users').update({bank_account:nb}).eq('email',currentUser.email);
+  if(error)alert(error.message);else{alert('✅ Bank updated!');currentUser.bank_account=nb;document.getElementById('userMeta').textContent=currentUser.email+' | '+currentUser.bank_name+' '+nb;}
+}
+async function deleteAccount(){
+  if(!confirm('Are you sure? This deletes your account FOREVER.'))return;
+  if(!confirm('Last chance - Delete '+currentUser.email+' ?'))return;
+  const {error}=await supabaseClient.from('users').delete().eq('email',currentUser.email);
+  if(error)alert(error.message);else{alert('Account deleted. Bye!');logout();}
+}
+
+function renderProvinceTabs(){const wrap=document.getElementById('provinceTabs');if(!wrap)return;wrap.innerHTML=`<button class="btn ${selectedProvince===''?'btn-dark':'btn-outline'}" onclick="setProvince('')">All SA</button>`;Object.keys(PROVINCES).forEach(p=>{wrap.innerHTML+=`<button class="btn ${selectedProvince===p?'btn-primary':'btn-outline'}" onclick="setProvince('${p}')">${p}</button>`;});}
+function setProvince(p){selectedProvince=p;const cs=document.getElementById('cityFilter');cs.innerHTML=`<option value="">All Cities ${p?'in '+p:''}</option>`;if(p)PROVINCES[p].forEach(c=>cs.innerHTML+=`<option>${c}</option>`);else Object.values(PROVINCES).flat().forEach(c=>cs.innerHTML+=`<option>${c}</option>`);renderProvinceTabs();loadListings();}
+function setType(t){selectedType=t;loadListings();}
+function updateCityDropdown(id,prov){const sel=document.getElementById(id);if(!sel)return;sel.innerHTML="";PROVINCES[prov].forEach(c=>sel.innerHTML+=`<option>${c}</option>`);}
+function switchTab(tab){currentTab=tab;document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('tab-'+tab).classList.add('active');if(tab==='all')loadListings();if(tab==='fav')loadFavourites();if(tab==='view')loadViewingRequests();if(tab==='enq')loadEnquiries();if(tab==='report')loadReports();}
+
+async function loadListings(){
+  const container=document.getElementById('listings');const stats=document.getElementById('stats');container.innerHTML='Loading...';
+  let q=supabaseClient.from('listings').select('*').order('created_at',{ascending:false});
+  if(selectedProvince)q=q.eq('province',selectedProvince);
+  const cityVal=document.getElementById('cityFilter')?.value;if(cityVal)q=q.eq('city',cityVal);
+  if(selectedType)q=q.eq('property_type',selectedType);
+  if(filterMin)q=q.gte('price',filterMin);
+  if(filterMax)q=q.lte('price',filterMax);
+  let {data,error}=await q;
+  if(error){container.innerHTML='Error: '+error.message;return;}
+  // SEARCH - filter in JS for location/title/province/city
+  if(searchText){
+    const s=searchText.toLowerCase();
+    data=data.filter(i=> (i.location||'').toLowerCase().includes(s) || (i.city||'').toLowerCase().includes(s) || (i.province||'').toLowerCase().includes(s) || (i.title||'').toLowerCase().includes(s));
+  }
+  if(!data||!data.length){container.innerHTML=`No houses for ${selectedProvince||'SA'} ${searchText||''} ${selectedType||''} yet.`;if(stats)stats.innerHTML='';return;}
+  const nsfas=data.filter(i=>Number(i.price)<5000).length;
+  if(stats)stats.innerHTML=`<div class="card"><b>${data.length}</b> Properties | ${nsfas} NSFAS | ${data.length-nsfas} Luxury ${searchText?`| Search: "${searchText}"`:''}</div>`;
+  container.innerHTML='';data.forEach(item=>{
+    const price=Number(item.price);const isNsfas=price<5000;
+    const card=document.createElement('div');card.className='card';
+    card.innerHTML=`${item.image_url?`<img src="${item.image_url}" style="width:100%;height:180px;object-fit:cover;border-radius:10px" onerror="this.style.display='none'">`:''}
+    <span class="badge ${isNsfas?'badge-nsfas':'badge-cpt'}">${isNsfas?'NSFAS R'+price:'Luxury R'+(price/1000000).toFixed(2)+'M'}</span> <span class="badge badge-rent">${item.province||''} • ${item.city||''}</span>
+    <h3 style="margin:10px 0">${item.title}</h3>
+    <p class="small"><b>Type:</b> ${item.property_type||'Bachelor'} | ${item.location||''}</p>
+    <p class="small">${item.description||''}</p>
+    <div class="small" style="background:#f8fafc;padding:8px;border-radius:8px;margin:8px 0"><b>Owner:</b> ${item.owner_name}<br><b>Bank:</b> ${item.owner_bank}</div>
+    <h3 style="color:#b45309">R ${price.toLocaleString()}</h3>
+    <div style="display:flex;gap:6px;margin-top:10px"><button class="btn btn-primary" style="flex:1" onclick="buyProperty('${item.id}','${item.title.replace(/'/g,"\\'")}',${price},'${(item.owner_bank||'').replace(/'/g,"\\'")}')">Buy / Rent</button><button class="btn btn-heart" onclick="toggleFavourite('${item.id}')">❤️</button></div>
+    <div style="display:flex;gap:6px;margin-top:6px"><button class="btn btn-outline" style="flex:1;font-size:12px" onclick="requestViewing('${item.id}')">👁️ View</button><button class="btn btn-outline" style="flex:1;font-size:12px" onclick="sendEnquiryPrompt('${item.id}')">💬 Enquire</button><button class="btn btn-danger" style="flex:1;font-size:12px" onclick="openReportFor('${item.id}','${item.title.replace(/'/g,"\\'")}')">🚨 Report</button></div>
+    ${currentUser&&currentUser.role==='owner'?`<button class="btn btn-dark" style="width:100%;margin-top:6px;font-size:12px" onclick="deleteListing('${item.id}')">Delete</button>`:''}`;
+    container.appendChild(card);
+  });
+}
+async function addListing(){const title=document.getElementById('newTitle').value.trim();const price=Number(document.getElementById('newPrice').value);const location=document.getElementById('newLocation').value.trim();const owner_name=document.getElementById('newOwnerName').value.trim()||currentUser.first_name+' '+currentUser.last_name;const owner_bank=document.getElementById('newOwnerBank').value.trim()||currentUser.bank_name+' '+currentUser.bank_account;const description=document.getElementById('newDesc').value.trim();const province=document.getElementById('newProvince').value;const city=document.getElementById('newCity').value;const property_type=document.getElementById('newPropType').value;const image_url=document.getElementById('newImage').value.trim();if(!title||!price||!location){alert('Title, Price, Location required');return;}const {error}=await supabaseClient.from('listings').insert([{title,price,location,owner_name,owner_bank,description,province,city,property_type,image_url,type:property_type}]);if(error){alert('Error: '+error.message);}else{alert('Saved in '+province+' - '+city);document.getElementById('addBox').style.display='none';loadListings();}}
+async function buyProperty(id,title,price,ownerBank){if(!currentUser){alert('Login first');showPage(4);return;}if(!confirm(`Buy ${title} for R${price}?`))return;const ref='PC-'+Math.floor(Math.random()*900000+100000);const {error}=await supabaseClient.from('transactions').insert([{client_email:currentUser.email,owner_bank:ownerBank,amount:price,property_title:title,reference:ref,status:'paid_to_owner'}]);if(error){alert(error.message);return;}await supabaseClient.from('listings').delete().eq('id',id);const msg=document.getElementById('transMsg');msg.style.display='block';msg.className='notice notice-success';msg.innerHTML=`SUCCESS! Ref ${ref}`;loadListings();}
+async function deleteListing(id){if(!confirm('Delete?'))return;await supabaseClient.from('listings').delete().eq('id',id);loadListings();}
+function logout(){currentUser=null;document.getElementById('authInfo').textContent='';document.getElementById('addListingBtn').style.display='none';document.getElementById('mainMenu').classList.remove('show');showPage(1);}
+async function toggleFavourite(id){if(!currentUser){alert('Login first');return;}const {data:ex}=await supabaseClient.from('favorites').select('*').eq('user_email',currentUser.email).eq('listing_id',id).limit(1);if(ex&&ex.length){await supabaseClient.from('favorites').delete().eq('id',ex[0].id);alert('Removed from favourites');}else{const {error}=await supabaseClient.from('favorites').insert([{user_email:currentUser.email,listing_id:id}]);if(error)alert(error.message);else alert('Added to favourites ❤️');}}
+async function loadFavourites(){const c=document.getElementById('listings');c.innerHTML='Loading favourites...';const {data:favs}=await supabaseClient.from('favorites').select('listing_id').eq('user_email',currentUser.email);if(!favs||!favs.length){c.innerHTML='No favourites yet';return;}const ids=favs.map(f=>f.listing_id);const {data:listings}=await supabaseClient.from('listings').select('*').in('id',ids);if(!listings||!listings.length){c.innerHTML='Favourites deleted by owner';return;}c.innerHTML='';listings.forEach(item=>{const d=document.createElement('div');d.className='card';d.innerHTML=`<h3>${item.title}</h3><p class="small">${item.province} - ${item.city} - ${item.property_type} - R${Number(item.price).toLocaleString()}</p><button class="btn btn-heart" onclick="toggleFavourite('${item.id}')">Remove</button>`;c.appendChild(d);});}
+async function requestViewing(id){if(!currentUser){alert('Login first');return;}const date=prompt('Viewing date (YYYY-MM-DD):',new Date().toISOString().split('T')[0]);if(!date)return;const msg=prompt('Message:','I want to view');const {error}=await supabaseClient.from('viewing_requests').insert([{client_email:currentUser.email,listing_id:id,viewing_date:date,message:msg,status:'pending'}]);if(error)alert(error.message);else alert('Viewing request sent!');}
+async function loadViewingRequests(){const c=document.getElementById('listings');c.innerHTML='Loading...';const {data}=await supabaseClient.from('viewing_requests').select('*').eq('client_email',currentUser.email).order('created_at',{ascending:false});if(!data||!data.length){c.innerHTML='No viewing requests';return;}c.innerHTML='';data.forEach(r=>{const d=document.createElement('div');d.className='card';d.innerHTML=`Viewing on <b>${r.viewing_date}</b> - <b>${r.status}</b><br><span class="small">${r.message||''}</span>`;c.appendChild(d);});}
+async function sendEnquiryPrompt(id){if(!currentUser){alert('Login first');return;}const msg=prompt('Your enquiry:','Is this still available?');if(!msg)return;const {error}=await supabaseClient.from('enquiries').insert([{client_email:currentUser.email,listing_id:id,message:msg}]);if(error)alert(error.message);else alert('Enquiry sent!');}
+async function loadEnquiries(){const c=document.getElementById('listings');c.innerHTML='Loading...';let data;if(currentUser.role==='owner'){const {data:my}=await supabaseClient.from('listings').select('id').eq('owner_name',currentUser.first_name+' '+currentUser.last_name);const ids=my?my.map(l=>l.id):[];const res=await supabaseClient.from('enquiries').select('*').in('listing_id',ids.length?ids:['00000000-0000-0000-0000-000000000000']).order('created_at',{ascending:false});data=res.data;}else{const res=await supabaseClient.from('enquiries').select('*').eq('client_email',currentUser.email).order('created_at',{ascending:false});data=res.data;}if(!data||!data.length){c.innerHTML='No enquiries yet';return;}c.innerHTML='';data.forEach(e=>{const d=document.createElement('div');d.className='card';d.innerHTML=`<b>From: ${e.client_email}</b><br>Q: ${e.message}<br>${e.reply?`<div class="notice notice-success">Reply: ${e.reply}</div>`:currentUser.role==='owner'?`<button class="btn btn-primary" onclick="replyEnquiry('${e.id}')">Reply</button>`:'<span class="small">Waiting for reply</span>'}`;c.appendChild(d);});}
+async function replyEnquiry(id){const reply=prompt('Reply:');if(!reply)return;const {error}=await supabaseClient.from('enquiries').update({reply}).eq('id',id);if(error)alert(error.message);else{alert('Replied!');loadEnquiries();}}
 </script>
 </body>
 </html>
